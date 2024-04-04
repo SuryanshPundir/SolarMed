@@ -52,7 +52,7 @@ const {user, role, token} = useContext(authContext)
         {/* logo */}
             <Link to="/" >
         <div className='flex items-center gap-2 md:gap-4'>
-          <img src={logo} alt="logo" className='w-8 h-8 md:w-10 md:h-10' />
+          <img src={logo} alt="logo" className='w-6 h-6 rounded-full md:w-10 md:h-10' />
           <h2 className='text-[24px] font-[600] md:text-[28px]'>SolarMed</h2>
         </div>
           </Link>
