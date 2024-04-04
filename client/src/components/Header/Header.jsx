@@ -76,7 +76,7 @@ const {user, role, token} = useContext(authContext)
             token && user ? <div className=' ' >
             <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`} className='flex items-center gap-4 font-semibold' >
             <figure className='w-[35px] h-[35px] rounded-full'>
-              <img src={ user?.photo} alt="" className='w-full rounded-full' />
+              <img src={ user?.photo} alt="" className='w-full h-full object-cover rounded-full' />
             </figure>
                 {/* <h2>{user?.name}</h2> */}
             </Link>

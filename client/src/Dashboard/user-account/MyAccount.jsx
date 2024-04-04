@@ -6,7 +6,8 @@ import Loading from '../../components/Loader/Loading'
 import Error from '../../components/Error/Error'
 
 import useGetProfile from '../../hooks/useFetchData'
-import { BASE_URL } from '../../config'
+import { BASE_URL, token } from '../../config'
+import { toast } from 'react-toastify'
 
 const MyAccount = () => {
   const {dispatch} = useContext(authContext)
@@ -18,10 +19,38 @@ const MyAccount = () => {
     error,
   } = useGetProfile(`${BASE_URL}/users/profile/me`)
 
-  console.log(userData, "userData");
   const handleLogout = () => { 
     dispatch({type:'LOGOUT'})
   }
+
+  const handleDeleteAccount = async () => {
+
+  console.log("Delete Account Handler");
+  console.log(userData._id);
+  try {
+    const response = await fetch(`${BASE_URL}/users/${userData._id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      // Handle successful deletion here
+      // Maybe dispatch a logout action?
+      dispatch({type:'LOGOUT'});
+      toast.success(result.message || 'Account deleted successfully');
+    } else {
+      throw new window.Error('Error deleting account');
+    }
+  } catch (error) {
+    console.error("Error deleting account: ", error);
+    toast.error(error.message || 'Error deleting account');
+    // Handle error here
+  }
+};
+
 
   return (
     <section>
@@ -35,8 +64,8 @@ const MyAccount = () => {
           !loading && !error && (<div className="grid md:grid-cols-3 gap-10">
         <div className="pb-[50px] px-[30px] rounded-md">
           <div className="flex items-center justify-center ">
-            <figure className="w-[100px] h-[100px] rounded-full border-2 border-solid border-primaryColor overflow-hidden">
-              <img src={userData.photo} alt="user image" className="w-full h-full" />
+            <figure className="w-[100px] h-[100px] rounded-full  border-2 border-solid border-primaryColor overflow-hidden">
+              <img src={userData.photo} alt="user image" className="w-full h-full object-cover" />
             </figure>
         </div>
           <div className="text-center mt-4">
@@ -49,7 +78,7 @@ const MyAccount = () => {
 
           <div className="mt-[50px] md:mt-[100px]">
             <button onClick={handleLogout} className="w-full bg-[#181a1e] p-3 text-[16px] leading-7 rounded-md text-white">LogOut</button>
-            <button className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">Delete account</button>
+            <button onClick={handleDeleteAccount} className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">Delete account</button>
           </div>
         </div>
 
