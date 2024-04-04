@@ -26,7 +26,7 @@ export const updateDoctor = async (req, res) => {
 
 export const deleteDoctor = async (req, res) => {
 	const id = req.params.id;
-	console.log("feleteDoctor", id);
+	
 	try {
 		await Doctor.findByIdAndDelete(id);
 		res.status(200).json({

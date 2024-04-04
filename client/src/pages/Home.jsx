@@ -48,9 +48,11 @@ const Home = () => {
               for Personalized <br />
               Wellness solutions!
             </h1>
+                <Link to="/doctors">
                 <button className=" hollowBtn hover:bg-primaryColor hover:text-white hover:border-transparent ">
                   Request an Appointment <FiArrowUpRight />
                 </button>
+                </Link>
               </div>
               <div className="mt-[30px] lg:mt-[70px] flex flex-col md:flex-row lg:items-center gap-5 lg:gap-[30px]">
                 <div>
@@ -136,7 +138,7 @@ const Home = () => {
               <div className="mt-[30px]">
                 <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">Find a Doctor</h2>
                 <p className="text-[16px] leading-6 text-textColor font-[400] mt-4 text-center">Explore our network to find the right doctor for your healthcare needs.</p>
-                <Link to="/" className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none">
+                <Link to="/doctors" className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none">
                   <BsArrowRight className='group-hover:text-white w-6 h-5'/>
                 </Link>
               </div>
@@ -149,7 +151,7 @@ const Home = () => {
               <div className="mt-[30px]">
                 <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">Discover Our Facilities</h2>
                 <p className="text-[16px] leading-6 text-textColor font-[400] mt-4 text-center">Navigate through our extensive list of healthcare locations to find the nearest facility.</p>
-                <Link to="/" className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none">
+                <Link to="/services" className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none">
                   <BsArrowRight className='group-hover:text-white w-6 h-5'/>
                 </Link>
               </div>

@@ -2,8 +2,10 @@ import {BiMenu} from "react-icons/bi"
 import { useContext, useState } from "react"
 import {authContext} from "../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { BASE_URL, token } from "../../config"
 
-const Tab = ({tab, setTab}) => {
+const Tab = ({data, tab, setTab}) => {
   const [isOpen, setIsOpen] = useState(false);
     const {dispatch} = useContext(authContext)
   const navigate = useNavigate()
@@ -12,6 +14,33 @@ const Tab = ({tab, setTab}) => {
         dispatch({type:'LOGOUT'})
     navigate("/")
   }
+  const handleDeleteAccount = async () => {
+
+  console.log("Delete Doctor Account Handler");
+  console.log(data._id);
+  try {
+    const response = await fetch(`${BASE_URL}/doctors/${data._id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      // Handle successful deletion here
+      // Maybe dispatch a logout action?
+      dispatch({type:'LOGOUT'});
+      toast.success(result.message || 'Account deleted successfully');
+    } else {
+      throw new window.Error('Error deleting account');
+    }
+  } catch (error) {
+    console.error("Error deleting account: ", error);
+    toast.error(error.message || 'Error deleting account');
+    // Handle error here
+  }
+};
   return (
     <div>
           <span className='lg:hidden'>
@@ -30,7 +59,7 @@ const Tab = ({tab, setTab}) => {
 
           <div className="mt-[50px] md:mt-[100px]">
             <button onClick={handleLogout} className="w-full bg-[#181a1e] p-3 text-[16px] leading-7 rounded-md text-white">LogOut</button>
-            <button className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">Delete account</button>
+            <button onClick={handleDeleteAccount} className="w-full bg-red-600 mt-4 p-3 text-[16px] leading-7 rounded-md text-white">Delete account</button>
           </div>
           </div>
     </div>

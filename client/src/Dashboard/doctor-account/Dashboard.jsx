@@ -28,7 +28,7 @@ const Dashboard = () => {
       {error && !loading && <Error  errMessage={error}/>}
       {!loading && !error && (
         <div className="grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]">
-          <Tab tab={tab} setTab={setTab} />
+          <Tab data={data} tab={tab} setTab={setTab} />
           <div className="lg:col-span-2">
             {data.isApproved === "pending" && <div className='flex p-4 text-yellow-800 bg-yellow-50 rounded-lg'>
               <span className="flex items-center justify-center">*</span><span className="sr-only">Info</span>
