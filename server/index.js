@@ -15,7 +15,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-    origin:true
+    origin: true
 }
 
 app.get('/', (req, res) => {
@@ -28,7 +28,7 @@ const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL)
         console.log("MongoDB connection established");
-    } catch (error) { 
+    } catch (error) {
         console.log(error);
     }
 }
@@ -44,7 +44,7 @@ app.use('/api/v1/reviews', reviewRoute);
 app.use("/api/v1/bookings", bookingRoute);
 
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     connectDB();
     console.log("Server is listening on port " + port);
 });
